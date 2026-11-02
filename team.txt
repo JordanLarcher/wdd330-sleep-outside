@@ -1,3 +1,6 @@
 WDD 330 - Sleep Outside
 Trello Board: https://trello.com/b/MxmzF9hX/sleep-outside-team-05
-Team: Augustine Baimba
+Team: Augustine Baimba, Jordan Larcher
+
+Render URL: [Will add after deployment]
+W01 Setup: Complete
