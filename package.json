@@ -12,13 +12,16 @@
   },
   "author": "Shane Thompson",
   "license": "ISC",
-    "engines": {
-    "node": "20"
+  "engines": {
+    "node": ">=20"
   },
   "devDependencies": {
-    "eslint": "^4.0.0",
+    "@eslint/compat": "^2.1.1",
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.14.0",
     "eslint-config-prettier": "^6.15.0",
     "eslint-plugin-import": "^1.14.0",
+    "globals": "^17.14.0",
     "jest": "^25.1.0",
     "prettier": "^3.2.5",
     "vite": "^8.3.5"
