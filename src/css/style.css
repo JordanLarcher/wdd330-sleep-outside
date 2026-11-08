@@ -131,6 +131,23 @@ button {
   fill: gray;
 }
 
+.cart-icon{
+  position: relative;
+  display: inline-block;
+}
+.cart-badge {
+  position: absolute;
+  top: -1px;
+  right: -3px;
+  background-color: orange;
+  color: black;
+  padding: 3px 5px;
+  border-radius: 50%;
+  font-size: 0.8em;
+  font-weight: bold;
+  text-align: center;
+}
+
 /* End cart icon styles */
 
 .mission {
