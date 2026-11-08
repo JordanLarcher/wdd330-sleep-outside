@@ -1,28 +1,34 @@
-import {renderWithTemplate } from "./utils.mjs"
-export function productCardTemplate(product){
+
+import { renderListWithTemplate } from "./utils.mjs";
+
+export function productCardTemplate(product) {
     return `<li class="product-card">
-    <a href="product_pages/?product=${product.Id}">
-      <img src="${product.Image}" alt="Image of ${product.Name}">
+    <a href="product_pages/index.html?product=${product.Id}">
+      <img src="${product.Image.replace("../images/", "/images/")}" alt="Image of ${product.Name}">
       <h2 class="card__brand">${product.Brand.Name}</h2>
       <h3 class="card__name">${product.NameWithoutBrand}</h3>
-      <p class="product-card__price">${product.FinalPrice}</p>
+      <p class="product-card__price">$${product.FinalPrice}</p>
     </a>
   </li>`;
 }
 
 export default class ProductList {
-    constructor(category, dataSource, listElement){
+    constructor(category, dataSource, listElement) {
         this.category = category;
         this.dataSource = dataSource;
         this.listElement = listElement;
     }
 
-    async init(){
+    async init() {
         const list = await this.dataSource.getData();
-        this.renderList(list)
+        this.renderList(list);
     }
 
-    renderList(productList){
-        renderWithTemplate(productCardTemplate, this.listElement, productList)
+    renderList(productList) {
+        renderListWithTemplate(
+            productCardTemplate,
+            this.listElement,
+            productList
+        );
     }
 }
