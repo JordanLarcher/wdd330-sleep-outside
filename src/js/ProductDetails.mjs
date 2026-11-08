@@ -1,3 +1,4 @@
+import { updateCartCount } from "./utils.mjs";
 export default class ProductDetails {
     constructor(productId, dataSource) {
         this.productId = productId;
@@ -9,6 +10,7 @@ export default class ProductDetails {
         this.product = await this.dataSource.findProductById(this.productId);
 
         this.renderProductDetails();
+        updateCartCount();
 
         document
             .getElementById('addToCart')
@@ -21,6 +23,7 @@ export default class ProductDetails {
         cartItems.push(this.product);
 
         localStorage.setItem('so-cart', JSON.stringify(cartItems));
+        updateCartCount();
     }
 
     addToCart() {
