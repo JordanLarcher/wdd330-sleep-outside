@@ -29,17 +29,43 @@ export function getParam(param) {
   return urlParams.get(param);
 }
 
+// Reusable function for rendering lists with templates
 export function renderListWithTemplate(
   templateFn,
   parentElement,
   list,
-  position = "afterbegin",
+  position = 'afterbegin',
   clear = false
 ) {
   if (clear) {
-    parentElement.innerHTML = "";
+    parentElement.innerHTML = '';
   }
 
   const htmlStrings = list.map(templateFn);
-  parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
+  parentElement.insertAdjacentHTML(position, htmlStrings.join(''));
+}
+
+export function renderWithTemplate(
+  templateFn,
+  parentElement,
+  list,
+  position = 'afterbegin',
+  clear = false
+) {
+  renderListWithTemplate(
+    templateFn,
+    parentElement,
+    list,
+    position,
+    clear
+  );
+}
+
+export function updateCartCount() {
+  const cartItems = getLocalStorage('so-cart') || [];
+  const cartCountElement = document.querySelector('#cart-count');
+
+  if (cartCountElement) {
+    cartCountElement.textContent = cartItems.length;
+  }
 }
