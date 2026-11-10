@@ -1,11 +1,15 @@
 import { getLocalStorage, updateCartCount } from './utils.mjs';
 
 function renderCartContents() {
-  const cartItems = getLocalStorage('so-cart');
+  const cartItems = getLocalStorage('so-cart') || [];
+  const productList = document.querySelector('.product-list');
+  if (cartItems.length === 0) {
+    productList.innerHTML = `<li class="cart-empty"><p>Your cart is empty.</p><p><a href="../index.html">Continue shopping</a> to add items to your cart.</p></li>`;
+    return;
+  }
   const htmlItems = cartItems.map((item) => cartItemTemplate(item));
-  document.querySelector(".product-list").innerHTML = htmlItems.join("");
+  productList.innerHTML = htmlItems.join('');
 }
-
 function cartItemTemplate(item) {
   const newItem = `<li class="cart-card divider">
   <a href="#" class="cart-card__image">
