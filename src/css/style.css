@@ -278,3 +278,17 @@ footer {
   font-size: var(--small-font);
   padding: 1em;
 }
+
+.discount-flag {
+  display: inline-block;
+  background-color: #b42318;
+  color: white;
+  font-weight: 700;
+  padding: 0.4rem 0.75rem;
+  border-radius: 0.4rem;
+  margin-top: 0.5rem;
+}
+
+.discount-flag[hidden] {
+  display: none;
+}
