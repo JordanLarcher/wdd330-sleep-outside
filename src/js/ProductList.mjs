@@ -1,6 +1,6 @@
-import {renderWithTemplate } from "./utils.mjs"
-export function productCardTemplate(product){
-    return `<li class="product-card">
+import { renderListWithTemplate } from "./utils.mjs"
+export function productCardTemplate(product) {
+  return `<li class="product-card">
     <a href="product_pages/?product=${product.Id}">
       <img src="${product.Image}" alt="Image of ${product.Name}">
       <h2 class="card__brand">${product.Brand.Name}</h2>
@@ -19,7 +19,10 @@ export default class ProductList {
   }
 
   async init() {
-    this.products = await this.dataSource.getData();
+    const allProducts = await this.dataSource.getData();
+    // Only show the products that already have a detail page
+    const idsWithDetailPage = ["880RR", "985RF", "985PR", "344YJ"];
+    this.products = allProducts.filter((product) => idsWithDetailPage.includes(product.Id));
     this.renderList(this.products);
 
     const sortSelect = document.querySelector('#product-sort');
@@ -67,7 +70,7 @@ export default class ProductList {
   }
 
   renderList(productList) {
-    renderWithTemplate(
+    renderListWithTemplate(
       productCardTemplate,
       this.listElement,
       productList,

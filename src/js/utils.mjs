@@ -31,14 +31,14 @@ export function getParam(param) {
 
 
 // Function to render templates
-export function renderWithTemplate(template, parentElement, list, position="afterbegin",  clear = false){
-    const productList = list.map(template)
+export function renderListWithTemplate(templateFn, parentElement, list, position = "afterbegin", clear = false) {
+  const productList = list.map(templateFn)
 
-    if (clear) {
-      parentElement.innerHTML = "";
-    }
+  if (clear) {
+    parentElement.innerHTML = "";
+  }
 
-    parentElement.insertAdjacentHTML(position, productList.join(''));
+  parentElement.insertAdjacentHTML(position, productList.join(''));
 }
 
 export function updateCartCount() {
