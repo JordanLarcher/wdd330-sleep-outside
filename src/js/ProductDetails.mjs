@@ -1,4 +1,4 @@
-import { updateCartCount } from "./utils.mjs";
+import { updateCartCount } from './utils.mjs';
 
 export default class ProductDetails {
     constructor(productId, dataSource) {
