@@ -1,4 +1,6 @@
-import {renderWithTemplate } from "./utils.mjs"
+import { renderListWithTemplate } from './utils.mjs'
+
+
 export function productCardTemplate(product){
     return `<li class="product-card">
     <a href="product_pages/?product=${product.Id}">
@@ -67,7 +69,7 @@ export default class ProductList {
   }
 
   renderList(productList) {
-    renderWithTemplate(
+    renderListWithTemplate(
       productCardTemplate,
       this.listElement,
       productList,
