@@ -26,6 +26,18 @@ export default class ProductDetails {
 }
 
 function productDetailsTemplate(product) {
+  // add discounted price if applicable
+  const isDiscounted = product.FinalPrice < product.SuggestedRetailPrice;
+  const discountPercent = Math.round(
+    ((product.SuggestedRetailPrice - product.FinalPrice) / product.SuggestedRetailPrice) * 100
+  );
+  const discountHtml = isDiscounted
+    ? `<div class="product-detail__discount">
+         <span class="discount-badge">Save ${discountPercent}%  off</span>
+         <p class="product-card__retail">Was: <s>$${product.SuggestedRetailPrice.toFixed(2)}</s></p>
+       </div>`
+    : "";
+
   return `<section class="product-detail">
     <h3>${product.Brand.Name}</h3>
     <h2 class="divider">${product.NameWithoutBrand}</h2>
@@ -34,6 +46,7 @@ function productDetailsTemplate(product) {
       src="${product.Image}"
       alt="${product.NameWithoutBrand}"
     />
+    ${discountHtml}
     <p class="product-card__price">$${product.FinalPrice}</p>
     <p class="product__color">${product.Colors[0].ColorName}</p>
     <p class="product__description">
@@ -44,3 +57,4 @@ function productDetailsTemplate(product) {
     </div>
   </section>`;
 }
+

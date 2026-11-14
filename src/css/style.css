@@ -261,3 +261,28 @@ footer {
   font-size: var(--small-font);
   padding: 1em;
 }
+
+
+/* discount badge*/
+
+.product-detail__discount {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.discount-badge {
+  background-color: #c82333;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 0.85rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 4px;
+}
+
+.product-card__retail {
+  color: #555555;
+  font-size: 0.95rem;
+  margin: 0;
+}
