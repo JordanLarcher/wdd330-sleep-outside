@@ -9,7 +9,17 @@ function renderCartContents() {
   }
   const htmlItems = cartItems.map((item) => cartItemTemplate(item));
   productList.innerHTML = htmlItems.join('');
+  renderCartTotal(cartItems);
 }
+
+function renderCartTotal(cartItems) {
+  const cartFooter = document.querySelector('.cart-footer');
+  const cartTotal = document.querySelector('.cart-total');
+  const total = cartItems.reduce((sum, item) => sum + Number(item.FinalPrice), 0);
+  cartTotal.innerHTML = `Total: $${total.toFixed(2)}`;
+  cartFooter.classList.remove('hide');
+}
+
 function cartItemTemplate(item) {
   const newItem = `<li class="cart-card divider">
   <a href="#" class="cart-card__image">

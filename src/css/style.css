@@ -90,7 +90,7 @@ p {
   margin-top: -1.3em;
 }
 
-.logo--square > div {
+.logo--square>div {
   margin-top: -1.7em;
 }
 
@@ -114,6 +114,10 @@ button {
   border-bottom: 2px solid var(--primary-color);
 }
 
+.hide {
+  display: none;
+}
+
 /* End utility classes */
 
 /* Cart icon styles */
@@ -131,10 +135,11 @@ button {
   fill: gray;
 }
 
-.cart-icon{
+.cart-icon {
   position: relative;
   display: inline-block;
 }
+
 .cart-badge {
   position: absolute;
   top: -1px;
