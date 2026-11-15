@@ -17,12 +17,12 @@ export default class ProductList {
     this.category = category;
     this.dataSource = dataSource;
     this.listElement = listElement;
-    this.products = [];
+    this.list = [];
   }
 
   async init() {
-    this.products = await this.dataSource.getData();
-    this.renderList(this.products);
+    this.list = await this.dataSource.getData(this.category);
+    this.renderList(this.list);
 
     const sortSelect = document.querySelector('#product-sort');
 
@@ -34,7 +34,7 @@ export default class ProductList {
   }
 
   sortProducts(sortBy) {
-    const sortedProducts = [...this.products];
+    const sortedProducts = [...this.list];
 
     switch (sortBy) {
       case 'name-asc':
