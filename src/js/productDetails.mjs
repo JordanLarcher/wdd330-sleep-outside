@@ -1,4 +1,5 @@
-import { updateCartCount } from "./utils.mjs";
+import { updateCartCount } from './utils.mjs';
+
 
 export default class ProductDetails {
     constructor(productId, dataSource) {
@@ -46,11 +47,16 @@ export default class ProductDetails {
         const finalPrice = Number(this.product.FinalPrice);
         const savings = retailPrice - finalPrice;
 
-        if (Number.isFinite(savings) && savings > 0 && retailPrice > 0) {
+        if (
+            discount &&
+            Number.isFinite(savings) &&
+            savings > 0 &&
+            retailPrice > 0
+        ) {
             const percentage = Math.round((savings / retailPrice) * 100);
             discount.textContent = `Save $${savings.toFixed(2)} (${percentage}% off)`;
             discount.hidden = false;
-        } else {
+        } else if (discount) {
             discount.hidden = true;
         }
 

@@ -1,34 +1,12 @@
-import { getLocalStorage, updateCartCount } from './utils.mjs';
+import { loadHeaderFooter, updateCartCount } from './utils.mjs';
+import ShoppingCart from './ShoppingCart.mjs';
 
-function renderCartContents() {
-  const cartItems = getLocalStorage('so-cart') || [];
-  const productList = document.querySelector('.product-list');
-  if (cartItems.length === 0) {
-    productList.innerHTML = `<li class="cart-empty"><p>Your cart is empty.</p><p><a href="../index.html">Continue shopping</a> to add items to your cart.</p></li>`;
-    return;
-  }
-  const htmlItems = cartItems.map((item) => cartItemTemplate(item));
-  productList.innerHTML = htmlItems.join('');
-}
-function cartItemTemplate(item) {
-  const newItem = `<li class="cart-card divider">
-  <a href="#" class="cart-card__image">
-    <img
-      src="${item.Image}"
-      alt="${item.Name}"
-    />
-  </a>
-  <a href="#">
-    <h2 class="card__name">${item.Name}</h2>
-  </a>
-  <p class="cart-card__color">${item.Colors[0].ColorName}</p>
-  <p class="cart-card__quantity">qty: 1</p>
-  <p class="cart-card__price">$${item.FinalPrice}</p>
-</li>`;
+const shoppingCart = new ShoppingCart();
 
-  return newItem;
+async function init() {
+  await loadHeaderFooter();
+  updateCartCount();
+  shoppingCart.renderCartContents();
 }
 
-
-renderCartContents();
-updateCartCount();
+init();
