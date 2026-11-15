@@ -220,6 +220,16 @@ button {
   width: 100%;
 }
 
+.product-detail__discount:not([hidden]) {
+  display: inline-block;
+  margin: 0.75em;
+  padding: 0.4em 0.7em;
+  border-radius: 0.25em;
+  background-color: var(--secondary-color);
+  color: white;
+  font-weight: bold;
+}
+
 /* Start cart list card styles */
 .cart-card {
   display: grid;
