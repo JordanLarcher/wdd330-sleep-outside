@@ -278,3 +278,21 @@ footer {
   font-size: var(--small-font);
   padding: 1em;
 }
+
+.product-categories {
+  display: flex;
+  justify-content: space-around;
+  list-style: none;
+  padding: 0;
+  text-align: center;
+}
+
+.product-categories a {
+  text-decoration: none;
+  color: var(--dark-grey);
+}
+
+.product-categories img {
+  width: 100px;
+  height: 100px;
+}

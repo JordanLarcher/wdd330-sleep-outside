@@ -35,7 +35,7 @@ export default class ProductDetails {
             this.product.NameWithoutBrand;
 
         const productImage = document.getElementById('product-image');
-        productImage.src = `/${this.product.Image}`;
+        productImage.src = this.product.Images.PrimaryLarge;
         productImage.alt = this.product.Name;
 
         document.getElementById('product-price').textContent =
