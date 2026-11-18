@@ -1,3 +1,7 @@
-import { loadHeaderFooter } from "./utils.mjs";
+import { updateCartCount, loadHeaderFooter } from './utils.mjs';
 
-loadHeaderFooter();
+
+(async () => {
+  await loadHeaderFooter();
+  updateCartCount();
+})();

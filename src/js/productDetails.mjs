@@ -1,4 +1,5 @@
-import { updateCartCount } from "./utils.mjs";
+import { updateCartCount } from './utils.mjs';
+
 
 export default class ProductDetails {
     constructor(productId, dataSource) {
@@ -40,6 +41,24 @@ export default class ProductDetails {
 
         document.getElementById('product-price').textContent =
             `$${this.product.FinalPrice}`;
+
+        const discount = document.getElementById('product-discount');
+        const retailPrice = Number(this.product.SuggestedRetailPrice);
+        const finalPrice = Number(this.product.FinalPrice);
+        const savings = retailPrice - finalPrice;
+
+        if (
+            discount &&
+            Number.isFinite(savings) &&
+            savings > 0 &&
+            retailPrice > 0
+        ) {
+            const percentage = Math.round((savings / retailPrice) * 100);
+            discount.textContent = `Save $${savings.toFixed(2)} (${percentage}% off)`;
+            discount.hidden = false;
+        } else if (discount) {
+            discount.hidden = true;
+        }
 
         document.getElementById('product-color').textContent =
             this.product.Colors[0].ColorName;
