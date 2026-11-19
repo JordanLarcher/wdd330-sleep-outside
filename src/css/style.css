@@ -172,6 +172,17 @@ button {
   margin-top: 2rem;
   padding: 1rem;
 }
+.sort-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.sort-controls select {
+  padding: 0.5rem;
+  border-radius: 4px;
+}
 
 .product-list {
   display: flex;

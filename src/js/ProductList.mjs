@@ -11,18 +11,49 @@ export function productCardTemplate(product){
 }
 
 export default class ProductList {
-    constructor(category, dataSource, listElement){
+    constructor(category, dataSource, listElement) {
         this.category = category;
         this.dataSource = dataSource;
         this.listElement = listElement;
+        this.products = [];
+        this.sortBy = "name-asc";
     }
 
-    async init(){
+    async init() {
         const list = await this.dataSource.getData();
-        this.renderList(list)
+        this.products = list;
+        this.renderList(this.getSortedList());
+        this.initSort();
     }
 
-    renderList(productList){
+    initSort() {
+        const sortSelect = document.getElementById("sort");
+        if (!sortSelect) return;
+        sortSelect.addEventListener("change", (e) => {
+            this.sortBy = e.target.value;
+            this.renderList(this.getSortedList());
+        });
+    }
+
+    getSortedList() {
+        const sorted = [...this.products];
+        if (this.sortBy === "name-asc") {
+            return sorted.sort((a, b) => a.NameWithoutBrand.localeCompare(b.NameWithoutBrand));
+        }
+        if (this.sortBy === "name-desc") {
+            return sorted.sort((a, b) => b.NameWithoutBrand.localeCompare(a.NameWithoutBrand));
+        }
+        if (this.sortBy === "price-asc") {
+            return sorted.sort((a, b) => Number(a.FinalPrice) - Number(b.FinalPrice));
+        }
+        if (this.sortBy === "price-desc") {
+            return sorted.sort((a, b) => Number(b.FinalPrice) - Number(a.FinalPrice));
+        }
+        return sorted;
+    }
+
+    renderList(productList) {
+        this.listElement.innerHTML = "";
         renderWithTemplate(productCardTemplate, this.listElement, productList)
     }
 }
