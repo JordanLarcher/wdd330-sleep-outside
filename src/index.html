@@ -30,6 +30,25 @@
 
       <section class="products">
         <h2>Top Products</h2>
+        <div class="sort-controls">
+          <label for="sort">Sort by:</label>
+          <select id="sort">
+            <option value="name-asc">Name: A to Z</option>
+            <option value="name-desc">Name: Z to A</option>
+            <option value="price-asc">Price: Low to High</option>
+            <option value="price-desc">Price: High to Low</option>
+          </select>
+        </div>
+        <ul class="product-list">
+          <li class="product-card">
+            <a href="product_pages/index.html?product=880RR">
+              <img
+                src="images/tents/marmot-ajax-tent-3-person-3-season-in-pale-pumpkin-terracotta~p~880rr_01~320.jpg"
+                alt="Marmot Ajax tent"
+              />
+              <h3 class="card__brand">Marmot</h3>
+              <h2 class="card__name">Ajax Tent - 3-Person, 3-Season</h2>
+              <p class="product-card__price">$199.99</p>
         <label for="product-sort">Sort products by:</label>
 
         <ul class="product-grid">
