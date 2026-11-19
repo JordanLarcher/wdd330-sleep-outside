@@ -10,6 +10,13 @@ import { getParam, updateCartCount, loadHeaderFooter } from './utils.mjs';
 })();
 
 const category = getParam('category');
+const categoryName = category
+  .split('-')
+  .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+  .join(' ');
+
+document.querySelector('.products h2').textContent =
+  `Top Products: ${categoryName}`;
 const productData = new ProductData();
 const htmlElement = document.querySelector('.product-list')
 const productList = new ProductList(category, productData, htmlElement);
