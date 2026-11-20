@@ -9,3 +9,7 @@ updateCartCount();
 document.querySelector("#zip").addEventListener("blur", () => {
   checkout.calculateOrderTotal();
 });
+document.forms["checkout"].addEventListener("submit", (e) => {
+  e.preventDefault();
+  checkout.checkout(document.forms["checkout"]);
+});

@@ -1,5 +1,22 @@
 import { getLocalStorage } from "./utils.mjs";
+import ExternalServices from "./ExternalServices.mjs";
+function formDataToJSON(formElement) {
+  const formData = new FormData(formElement);
+  const convertedJSON = {};
+  formData.forEach(function (value, key) {
+    convertedJSON[key] = value;
+  });
+  return convertedJSON;
+}
 
+function packageItems(items) {
+  return items.map((item) => ({
+    id: item.Id,
+    name: item.Name,
+    price: item.FinalPrice,
+    quantity: 1,
+  }));
+}
 export default class CheckoutProcess {
   constructor(key, outputSelector) {
     this.key = key;
@@ -9,6 +26,7 @@ export default class CheckoutProcess {
     this.shipping = 0;
     this.tax = 0;
     this.orderTotal = 0;
+    this.services = new ExternalServices();
   }
 
   init() {
@@ -44,5 +62,22 @@ export default class CheckoutProcess {
     if (shippingEl) shippingEl.innerText = `$${this.shipping.toFixed(2)}`;
     if (taxEl) taxEl.innerText = `$${this.tax.toFixed(2)}`;
     if (orderTotalEl) orderTotalEl.innerText = `$${this.orderTotal.toFixed(2)}`;
+  }
+  async checkout(form) {
+    const json = formDataToJSON(form);
+    // Make sure totals are up to date
+    this.calculateOrderTotal();
+    json.orderDate = new Date().toISOString();
+    json.orderTotal = this.orderTotal.toFixed(2);
+    json.tax = this.tax.toFixed(2);
+    json.shipping = this.shipping;
+    json.items = packageItems(this.list);
+    console.log(json);
+    try {
+      const res = await this.services.checkout(json);
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
   }
 }

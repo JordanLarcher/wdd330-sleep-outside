@@ -1,11 +1,11 @@
-import ProductData from "./ProductData.mjs"
+import ExternalServices from "./ExternalServices.mjs";
 import ProductList from "./ProductList.mjs"
 import { updateCartCount } from "./utils.mjs";
 
 
-const productData = new ProductData("tents");
+const dataSource = new ExternalServices("tents");
 const htmlElement = document.querySelector(".product-list")
-const productList = new ProductList("Tents", productData, htmlElement);
+const productList = new ProductList("Tents", dataSource, htmlElement);
 productList.init();
 
 updateCartCount();
