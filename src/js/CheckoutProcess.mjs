@@ -1,4 +1,4 @@
-import { getLocalStorage } from "./utils.mjs";
+import { getLocalStorage, alertMessage } from "./utils.mjs";
 import ExternalServices from "./ExternalServices.mjs";
 function formDataToJSON(formElement) {
   const formData = new FormData(formElement);
@@ -73,11 +73,30 @@ export default class CheckoutProcess {
     json.shipping = this.shipping;
     json.items = packageItems(this.list);
     console.log(json);
-    try {
-      const res = await this.services.checkout(json);
-      console.log(res);
-    } catch (err) {
-      console.log(err);
+     try {
+    const res = await this.services.checkout(json);
+    console.log(res);
+    // Happy Path: clear cart + go to success page
+    localStorage.removeItem(this.key);
+    location.assign("/checkout/success.html");
+   } catch (err) {
+    console.log(err);
+    // Unhappy Path: stay on form, show the server's message
+    document.querySelectorAll(".alert").forEach((a) => a.remove());
+    let message = "There was a problem with your order. Please try again.";
+    if (err.message) {
+      if (typeof err.message === "string") {
+        message = err.message;
+            } else if (err.message.message) {
+        message = err.message.message;
+      } else if (typeof err.message === "object") {
+        // Server sends { "expiration": "Card expired" } etc.
+        message = Object.values(err.message).join(" ");
+      } else {
+        message = JSON.stringify(err.message);
+      }
     }
+    alertMessage(message);
+  }
   }
 }

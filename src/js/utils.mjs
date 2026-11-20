@@ -48,3 +48,25 @@ export function updateCartCount() {
     cartCountElement.textContent = cartItems.length;
   }
 }
+export function alertMessage(message, scroll = true) {
+  // create element to hold the alert
+  const alert = document.createElement("div");
+  // add a class to style the alert
+  alert.classList.add("alert");
+  // set the contents - message + X to close
+  alert.innerHTML = `<p>${message}</p><span>X</span>`;
+
+  // add the alert to the top of main
+  const main = document.querySelector("main");
+  main.prepend(alert);
+
+  // add a listener - if they clicked the X, remove it
+  alert.addEventListener("click", function (e) {
+    if (e.target.tagName == "SPAN") {
+      main.removeChild(this);
+    }
+  });
+
+  // make sure they see it by scrolling to the top
+  if (scroll) window.scrollTo(0, 0);
+}
