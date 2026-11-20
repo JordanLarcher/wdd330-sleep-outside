@@ -36,6 +36,7 @@ export default class ShoppingCart{
     <p class="cart-card__color">${item.Colors[0].ColorName}</p>
     <p class="cart-card__quantity">qty: 1</p>
     <p class="cart-card__price">$${item.FinalPrice}</p>
+    <div data-id="${item.Id}" class="cart-card__remove">X</div>
     </li>`;
 
     return newItem;
