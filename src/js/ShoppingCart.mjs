@@ -21,7 +21,7 @@ export default class ShoppingCart{
 
     removeItem(itemId) {
         const itemIndex = this.cartItems.findIndex( item => String(item.Id) === String(itemId));
-        if (itemIndex  !== 1) {
+        if (itemIndex  !== -1) {
             this.cartItems.splice(itemIndex, 1);
         }
         setLocalStorage('so-cart', this.cartItems);
