@@ -326,3 +326,13 @@ footer {
 .discount-flag[hidden] {
   display: none;
 }
+
+.product-card__discount {
+  display: inline-block;
+  background-color: #a4161a;
+  color: white;
+  font-weight: bold;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  margin: 0.25rem 0;
+}
