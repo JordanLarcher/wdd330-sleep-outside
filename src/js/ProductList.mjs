@@ -1,4 +1,5 @@
 import { renderListWithTemplate } from "./utils.mjs";
+import { loadHeaderFooter } from "./utils.mjs";
 
 
 function productCardTemplate(product) {
@@ -30,5 +31,6 @@ export default class ProductList {
 
 }
 
+loadHeaderFooter();
 
 
