@@ -258,6 +258,7 @@ button {
 .cart-card {
   display: grid;
   grid-template-columns: 25% auto 15%;
+  margin: 10px;
   font-size: var(--small-font);
   /* max-height: 120px; */
   align-items: center;
@@ -304,7 +305,7 @@ button {
 
   .cart-card {
     font-size: inherit;
-    grid-template-columns: 150px auto 15%;
+    display: flex;
   }
 }
 
