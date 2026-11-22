@@ -19,7 +19,13 @@ export default class ProductDetails {
 
     addProductToCart() {
         const cartItems = JSON.parse(localStorage.getItem('so-cart')) || [];
-        cartItems.push(this.product);
+        const existingItem = cartItems.find(item => String(item.Id) === String(this.product.Id));
+        if (existingItem) {
+            existingItem.Quantity += 1;
+        } else {
+            this.product.Quantity = 1;
+            cartItems.push(this.product);
+        }
         localStorage.setItem('so-cart', JSON.stringify(cartItems));
         updateCartCount();
     }
