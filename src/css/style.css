@@ -286,3 +286,29 @@ footer {
   font-size: 0.95rem;
   margin: 0;
 }
+
+
+/* icon */
+
+.icon-grid {
+  display: flex;
+  justify-content: space-around;
+  list-style-type: none;
+  padding: 0;
+  text-align: center;
+}
+
+.icon-grid li {
+  width: 150px;
+  padding: 1rem;
+}
+
+.icon-grid a {
+  text-decoration: none;
+  color: black;
+}
+
+.icon-grid img {
+  width: 100px;
+  height: auto;
+}

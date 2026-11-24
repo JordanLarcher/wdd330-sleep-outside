@@ -1,6 +1,8 @@
 import { resolve } from "path";
 import { defineConfig } from "vite";
 
+
+// https://vitejs.dev/config/
 export default defineConfig({
   root: "src/",
 
@@ -8,16 +10,11 @@ export default defineConfig({
   outDir: "../dist",
   rollupOptions: {
     input: {
-      // main: resolve(__dirname, "src/index.html"),
-      // cart: resolve(__dirname, "src/cart/index.html"),
-      // checkout: resolve(__dirname, "src/checkout/index.html"),
-      // product: resolve(__dirname, "src/product_pages/index.html"
       main: resolve(import.meta.dirname, "src/index.html"),
         cart: resolve(import.meta.dirname, "src/cart/index.html"),
         checkout: resolve(import.meta.dirname, "src/checkout/index.html"),
-        product: resolve(import.meta.dirname, "src/product_pages/index.html"
-      ),
-
+        product: resolve(import.meta.dirname, "src/product_pages/index.html"),
+        product_listing: resolve(import.meta.dirname, "src/product_listing/index.html")
     },
   },
 },

@@ -20,13 +20,13 @@ export function setClick(selector, callback) {
   const product = urlParams.get('product');
   qs(selector).addEventListener("click", callback);
 }
-
+// get a query parameter from the URL
 export function getParam(param) {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   return urlParams.get(param);
 }
-
+// Renders a list of items to the page using the provided template function and parent element.
 export function renderListWithTemplate(
   templateFn,
   parentElement,
@@ -40,7 +40,7 @@ export function renderListWithTemplate(
   }
   parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
 }
-
+// Renders a single template to the page and optionally calls a callback function with the provided data.
 export function renderWithTemplate(
   templateFn,
   parentElement,
@@ -52,7 +52,7 @@ export function renderWithTemplate(
     }
 
 }
-
+// Load the header and footer templates and render them to the page.
 async function loadTemplate(path) {
   const res = await fetch(path);
   const template = await res.text();
