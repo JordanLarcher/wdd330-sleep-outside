@@ -30,9 +30,20 @@ export default class ProductDetails {
         updateCartCount();
     }
 
-    addToCart() {
-        this.addProductToCart();
+   addToCart() {
+    this.addProductToCart();
+
+    const cartIcon = document.querySelector('.cart');
+
+    if (cartIcon) {
+        cartIcon.classList.remove('cart-animate');
+
+        // Restart the animation for consecutive additions
+        void cartIcon.offsetWidth;
+
+        cartIcon.classList.add('cart-animate');
     }
+}
 
     renderProductDetails() {
         document.getElementById('product-brand').textContent =
