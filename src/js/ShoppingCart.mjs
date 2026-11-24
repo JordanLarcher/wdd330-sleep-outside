@@ -1,9 +1,14 @@
 import { getLocalStorage, setLocalStorage, updateCartCount, renderListWithTemplate } from './utils.mjs';
 
-export default class ShoppingCart{
-    
-    constructor(){
+export default class ShoppingCart {
+
+    constructor() {
         this.cartItems = getLocalStorage('so-cart') || [];
+        this.cartItems.forEach(item => {
+            item.Quantity = Number(item.Quantity) || 1;
+        });
+
+        setLocalStorage('so-cart', this.cartItems);
         this.productList = document.querySelector('.product-list');
         this.cartFooter = document.querySelector('.cart-footer');
         this.cartTotal = document.querySelector('.cart-total');
@@ -32,7 +37,7 @@ export default class ShoppingCart{
 
     removeItem(itemId) {
         const itemIndex = this.cartItems.findIndex(item => String(item.Id) === String(itemId));
-        if (itemIndex  !== -1) {
+        if (itemIndex !== -1) {
             this.cartItems.splice(itemIndex, 1);
         }
         setLocalStorage('so-cart', this.cartItems);
@@ -49,7 +54,12 @@ export default class ShoppingCart{
     }
 
     renderCartTotal(cartItems) {
-        const total = cartItems.reduce((sum, item) => sum + Number(item.FinalPrice) * item.Quantity, 0);
+        const total = cartItems.reduce((sum, item) => {
+            const price = Number(item.FinalPrice) || 0;
+            const quantity = Number(item.Quantity) || 1;
+            return sum + price * quantity;
+        }, 0);
+
         this.cartTotal.innerHTML = `Total: $${total.toFixed(2)}`;
         this.cartFooter.classList.remove('hide');
     }
@@ -69,29 +79,31 @@ export default class ShoppingCart{
                 this.removeItem(itemId);
             } else {
                 setLocalStorage('so-cart', this.cartItems);
-            }  
+            }
         }
     };
     cartItemTemplate(item) {
-        const newItem = `<li class="cart-card divider">
-            <a href="#" class="cart-card__image">
-                <img
-                src="${item.PrimaryMedium}"
-                alt="${item.Name}"
-                />
-            </a>
-            <a href="#">
-                <h2 class="card__name">${item.Name}</h2>
-            </a>
-            <p class="cart-card__color">${item.Colors[0].ColorName}</p>
-            <button class="cart-card__quantity-btn" data-action="increase" data-id="${item.Id}">+</button>
-            <p class="cart-card__quantity">qty: ${item.Quantity}</p>
-            <button class="cart-card__quantity-btn" data-action="decrease" data-id="${item.Id}">-</button>
-            <p class="cart-card__price">$${(item.FinalPrice * item.Quantity).toFixed(2)}</p>
-            <button type="button" class="cart-card__remove" data-id="${item.Id}" aria-label="Remove ${item.Name} from cart">X</button>
-            </li>`;
+        const quantity = Number(item.Quantity) || 1;
+        const price = Number(item.FinalPrice) || 0;
+        const image = item.Images?.PrimaryMedium || item.Image;
 
-        return newItem;
-    };
+        return `<li class="cart-card divider">
+        <a href="#" class="cart-card__image">
+            <img
+                src="${image}"
+                alt="${item.Name}"
+            />
+        </a>
+        <a href="#">
+            <h2 class="card__name">${item.Name}</h2>
+        </a>
+        <p class="cart-card__color">${item.Colors[0].ColorName}</p>
+        <button class="cart-card__quantity-btn" data-action="increase" data-id="${item.Id}">+</button>
+        <p class="cart-card__quantity">qty: ${quantity}</p>
+        <button class="cart-card__quantity-btn" data-action="decrease" data-id="${item.Id}">-</button>
+        <p class="cart-card__price">$${(price * quantity).toFixed(2)}</p>
+        <button type="button" class="cart-card__remove" data-id="${item.Id}" aria-label="Remove ${item.Name} from cart">X</button>
+    </li>`;
+    }
 
 }
