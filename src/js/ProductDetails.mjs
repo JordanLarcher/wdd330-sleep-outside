@@ -50,9 +50,13 @@ function productDetailsTemplate(product) {
   return `<section class="product-detail">
     <h3>${product.Brand.Name}</h3>
     <h2 class="divider">${product.NameWithoutBrand}</h2>
-    <img
-      class="divider"
-      <img src="${product.Images.PrimaryLarge}" alt="${product.NameWithoutBrand}"/>
+    <picture>
+      <source media="(min-width: 900px)" srcset="${product.Images.PrimaryExtraLarge}" />
+      <source media="(min-width: 600px)" srcset="${product.Images.PrimaryLarge}" />
+      <source media="(min-width: 400px)" srcset="${product.Images.PrimaryMedium}" />
+      <img class="divider" src="${product.Images.PrimarySmall}" alt="${product.NameWithoutBrand}" />
+    </picture>
+
     ${discountHtml}
     <p class="product-card__price">$${product.FinalPrice}</p>
     <p class="product__color">${product.Colors[0].ColorName}</p>
