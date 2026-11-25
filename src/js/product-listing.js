@@ -1,5 +1,5 @@
 
-import ProductData from './ProductData.mjs';
+import ExternalServices from './ExternalServices.mjs';
 import ProductList from './ProductList.mjs';
 import { getParam, updateCartCount, loadHeaderFooter } from './utils.mjs';
 
@@ -17,7 +17,7 @@ const categoryName = category
 
 document.querySelector('.products h2').textContent =
   `Top Products: ${categoryName}`;
-const productData = new ProductData();
-const htmlElement = document.querySelector('.product-list')
-const productList = new ProductList(category, productData, htmlElement);
+const dataSource = new ExternalServices();
+const htmlElement = document.querySelector('.product-list');
+const productList = new ProductList(category, dataSource, htmlElement);
 productList.init();
