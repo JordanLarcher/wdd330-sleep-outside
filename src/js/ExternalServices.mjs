@@ -1,0 +1,46 @@
+const baseUrl = import.meta.env.VITE_SERVER_URL;
+
+function convertToJson(res) {
+  if (res.ok) {
+    return res.json();
+  } else {
+    throw new Error('Bad Response');
+  }
+}
+
+export default class ExternalServices {
+  constructor() { }
+  async getData(category) {
+    const response = await fetch(`${baseUrl}products/search/${category}`);
+    const data = await convertToJson(response);
+    return data.Result;
+  }
+
+  async findProductById(id) {
+    const response = await fetch(`${baseUrl}product/${id}`);
+    const product = await convertToJson(response);
+    return product.Result;
+  }
+
+  async checkout(payload) {
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    };
+
+    const response = await fetch(
+      'https://wdd330-backend-osp8.onrender.com/checkout',
+      options
+    );
+
+    console.log('Checkout HTTP status:', response.status);
+
+    const responseBody = await response.clone().text();
+    console.log('Checkout response body:', responseBody);
+
+    return await convertToJson(response);
+  }
+}
