@@ -1,4 +1,4 @@
-import { getLocalStorage } from './utils.mjs';
+import { getLocalStorage, setLocalStorage } from './utils.mjs';
 
 function formDataToJSON(formElement) {
     const formData = new FormData(formElement);
@@ -102,6 +102,13 @@ export default class CheckoutProcess {
         order.tax = this.tax.toFixed(2);
         order.items = this.packageItems(this.list);
 
-        return await this.externalServices.checkout(order);
+        try {
+            const response = await this.externalServices.checkout(order);
+            setLocalStorage(this.key, []);
+            window.location.href = '/checkout/success.html';
+            return response;
+        } catch (err) {
+            console.log(err);
+        }
     }
 }
